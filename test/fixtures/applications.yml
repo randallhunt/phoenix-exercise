@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  clientId: 1
+  annualIncome: 1
+  monthlyDebt: 1
+
+two:
+  clientId: 1
+  annualIncome: 1
+  monthlyDebt: 1
