@@ -26,7 +26,11 @@ def total_clients(clause)
 end
 
 def clients_with_application(clause)
-  sql = "SELECT DISTINCT(a.client_id) AS cnt FROM applications a INNER JOIN clients c ON a.client_id=c.id"
+  sql = %Q(
+    SELECT DISTINCT(a.client_id) AS cnt 
+    FROM applications a
+    INNER JOIN clients c ON a.client_id=c.id
+  )
   if clause.present?
     sql = "#{sql} WHERE #{clause}"
   end
@@ -35,7 +39,12 @@ def clients_with_application(clause)
 end
 
 def clients_missing_data(clause)
-  sql = "SELECT c.first_name,  c.last_name, c.email, r.credit_score FROM clients c LEFT JOIN credits r on c.id=r.client_id  WHERE r.client_id IS NULL"
+  sql = %Q(
+    SELECT c.first_name,  c.last_name, c.email, r.credit_score
+    FROM clients c
+    LEFT JOIN credits r on c.id=r.client_id
+    WHERE r.client_id IS NULL
+  )
   if clause.present?
     sql = "#{sql} AND (#{clause})"
   end
@@ -44,7 +53,11 @@ def clients_missing_data(clause)
 end
 
 def average_credit_score(clause)
-  sql = "SELECT AVG(r.credit_score) AS avg FROM credits r INNER JOIN clients c ON c.id=r.client_id"
+  sql = %Q(
+    SELECT AVG(r.credit_score) AS avg
+    FROM credits r
+    INNER JOIN clients c ON c.id=r.client_id
+  )
   if clause.present?
     sql = "#{sql} WHERE (#{clause})"
   end
